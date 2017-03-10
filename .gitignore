@@ -1,0 +1,18 @@
+
+
+#Unreal Engine XCodeGitIgnore#
+
+**/Binaries
+
+**/Build
+
+**/DerivedDataCache
+
+**/Intermediate
+
+**/Saved
+
+Content/StarterContent/
+
+**/xcuserdata
+EscapeGame.xcworkspace/contents.xcworkspacedata
