@@ -32,9 +32,9 @@ void UGrabbingSystem::TickComponent(float DeltaTime, ELevelTick TickType, FActor
     FVector ViewPointLocation;
     FRotator ViewPointRotation;
     DefaultPawn->GetPlayerViewPoint(
-                                    OUT ViewPointLocation,
-                                    OUT ViewPointRotation
-                                    );
+        OUT ViewPointLocation,
+        OUT ViewPointRotation
+    );
     /*UE_LOG(LogTemp,
            Warning,
            TEXT("The viewPoint of the Pawn is : %s, %s"),
@@ -42,15 +42,37 @@ void UGrabbingSystem::TickComponent(float DeltaTime, ELevelTick TickType, FActor
            *ViewPointRotation.ToString());*/
     FVector LineTraceEnd = ViewPointLocation + ViewPointRotation.Vector() * Reach;
     DrawDebugLine(
-                  GetWorld(),
-                  ViewPointLocation,
-                  LineTraceEnd,
-                  FColor(255,0,0),
-                  false,
-                  0.0f,
-                  0.0f,
-                  10.0
-                  );
+        GetWorld(),
+        ViewPointLocation,
+        LineTraceEnd,
+        FColor(255,0,0),
+        false,
+        0.0f,
+        0.0f,
+        10.0
+    );
+    
+    FCollisionQueryParams TraceParameters(FName(TEXT("")), false, GetOwner());
+    
+    FHitResult HitResult;
+    GetWorld()->LineTraceSingleByObjectType(
+        OUT HitResult,
+        ViewPointLocation,
+        LineTraceEnd,
+        FCollisionObjectQueryParams(ECollisionChannel::ECC_PhysicsBody),
+        TraceParameters
+    );
+    
+    AActor* HitActor = HitResult.GetActor();
+    if(HitActor)
+    {
+        UE_LOG(LogTemp,
+            Warning,
+            TEXT("I'm touching with the AKA-Ray cast : %s"), *(HitActor->GetName())
+            );
+    }
+        
+    
     // ...
     
 }
