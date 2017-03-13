@@ -20,6 +20,17 @@ void UGrabbingSystem::BeginPlay()
 {
     Super::BeginPlay();
     DefaultPawn = GetWorld()->GetFirstPlayerController();
+    PhysicsHandle = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
+    if(PhysicsHandle)
+    {
+        // Nothing to do It's just a test if the pointer is
+    }
+    else
+    {
+        UE_LOG(LogTemp, Error,
+               TEXT("%s missing component physics Handle"), *(GetOwner()->GetName())
+               );
+    }
     // ...
     
 }
