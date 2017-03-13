@@ -35,12 +35,24 @@ void UGrabbingSystem::TickComponent(float DeltaTime, ELevelTick TickType, FActor
                                     OUT ViewPointLocation,
                                     OUT ViewPointRotation
                                     );
-    UE_LOG(LogTemp,
+    /*UE_LOG(LogTemp,
            Warning,
            TEXT("The viewPoint of the Pawn is : %s, %s"),
            *ViewPointLocation.ToString(),
-           *ViewPointRotation.ToString());
+           *ViewPointRotation.ToString());*/
+    FVector LineTraceEnd = ViewPointLocation + ViewPointRotation.Vector() * Reach;
+    DrawDebugLine(
+                  GetWorld(),
+                  ViewPointLocation,
+                  LineTraceEnd,
+                  FColor(255,0,0),
+                  false,
+                  0.0f,
+                  0.0f,
+                  10.0
+                  );
     // ...
+    
 }
 
 

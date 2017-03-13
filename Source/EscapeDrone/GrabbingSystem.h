@@ -25,6 +25,8 @@ public:
     
 private:
     APlayerController* DefaultPawn;
+    UPROPERTY(EditAnywhere)
+    float Reach= 100.0f;
     
     
 };
