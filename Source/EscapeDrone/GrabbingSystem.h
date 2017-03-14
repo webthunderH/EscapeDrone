@@ -29,8 +29,16 @@ private:
     float Reach= 100.0f;
     UPhysicsHandleComponent* PhysicsHandle = nullptr;
     UInputComponent* InputComponent= nullptr;
-    
+        
     void Grab();
     void Released();
+    // Find the physics Handle Component
+    void FindPhysicsHandleComponent();
+    // Setup the attached Input component
+    void SetupInputComponent();
+    // return the first target hit by the ray cast.
+    const FHitResult LastPhyscBodyHit();
+    // Method to debug line helps
+    void MyDebugLine();
     
 };
