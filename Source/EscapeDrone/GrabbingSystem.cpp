@@ -31,6 +31,21 @@ void UGrabbingSystem::BeginPlay()
                TEXT("%s missing component physics Handle"), *(GetOwner()->GetName())
                );
     }
+    InputComponent = GetOwner()->FindComponentByClass<UInputComponent>();
+    if(InputComponent)
+    {
+        UE_LOG(LogTemp, Warning,
+               TEXT("Input Component is active on %s"), *(GetOwner()->GetName())
+               );
+        InputComponent->BindAction("Grab", IE_Pressed, this, &UGrabbingSystem::Grab);
+        InputComponent->BindAction("Released", IE_Released, this, &UGrabbingSystem::Released);
+    }
+    else
+    {
+        UE_LOG(LogTemp, Error,
+               TEXT("%s missing Input Component"), *(GetOwner()->GetName())
+               );
+    }
     // ...
     
 }
@@ -86,6 +101,21 @@ void UGrabbingSystem::TickComponent(float DeltaTime, ELevelTick TickType, FActor
     
     // ...
     
+}
+void UGrabbingSystem::Grab()
+{
+    UE_LOG(LogTemp,
+           Warning,
+           TEXT("I press grab key")
+           );
+
+}
+void UGrabbingSystem::Released()
+{
+    UE_LOG(LogTemp,
+           Warning,
+           TEXT("I Released grab key")
+           );
 }
 
 
