@@ -51,16 +51,15 @@ void UOpenDoor::CloseDoor()
 }
 float UOpenDoor::GetMassOnTriggerVolume()
 {
-    float Result=0;
+    float TotalMass=0.0f;
     TArray<AActor*> Overlapping;
     PressurePlate->GetOverlappingActors(OUT Overlapping);
-    for(const auto* Actor : Overlapping)
+    for(const auto& Actor : Overlapping)
     {
-        float Mass =Actor->FindComponentByClass<UPrimitiveComponent>()->GetMass();
-        Result+=Mass;
-        UE_LOG(LogTemp, Warning, TEXT("%s weight is %s"),*(Actor->GetName(), *Mass);
+        TotalMass+=Actor->FindComponentByClass<UPrimitiveComponent>()->GetMass();;
+        UE_LOG(LogTemp,Warning,TEXT("%s is on pressure plate"),*(Actor->GetName()));
     }
-    return Result;
+    return TotalMass;
 }
 
 
