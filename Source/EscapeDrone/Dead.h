@@ -22,9 +22,9 @@ public:
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
 private :
-    AActor* Owner;
+    AActor* Owner =nullptr;
     
     UPROPERTY(EditAnywhere)
-    ATriggerVolume* KillZone1;
+    ATriggerVolume* KillZone1=nullptr;
 	
 };

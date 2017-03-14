@@ -27,7 +27,7 @@ public:
     FVector GetLineReachEnd();
     
 private:
-    APlayerController* DefaultPawn;
+    APlayerController* DefaultPawn= nullptr;
     UPROPERTY(EditAnywhere)
     float Reach= 100.0f;
     UPhysicsHandleComponent* PhysicsHandle = nullptr;

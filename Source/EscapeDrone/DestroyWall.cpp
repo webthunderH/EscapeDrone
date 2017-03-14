@@ -32,6 +32,7 @@ void UDestroyWall::TickComponent(
                                  FActorComponentTickFunction* ThisTickFunction)
 {
     Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+    if (!PressurePlate) {return;};
     if (PressurePlate->IsOverlappingActor(ActorThatDestroyWall))
     {
         DestroyTheWall();

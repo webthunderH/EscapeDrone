@@ -24,9 +24,9 @@ public:
     virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
     private :
     UPROPERTY(EditAnywhere)
-    ATriggerVolume* PressurePlate;
+    ATriggerVolume* PressurePlate= nullptr;
     
-    AActor* ActorThatDestroyWall;
+    AActor* ActorThatDestroyWall=nullptr;
     
     
 };

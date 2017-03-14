@@ -32,6 +32,7 @@ void UGrabbingSystem::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 {
     Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
     // Check if a physic handle is attached
+    if (!PhysicsHandle) {return;};
     if (PhysicsHandle->GrabbedComponent)
     {
         PhysicsHandle->SetTargetLocation(GetLineReachEnd());
@@ -41,7 +42,8 @@ void UGrabbingSystem::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 void UGrabbingSystem::Grab()
 {
     UPrimitiveComponent* ComponentToGrab = LastPhyscBodyHit().GetComponent();
-    if (LastPhyscBodyHit().GetActor()!= nullptr) {
+    if (LastPhyscBodyHit().GetActor()!= nullptr)
+    {   if (!PhysicsHandle) {return;};
         PhysicsHandle->GrabComponent(
             ComponentToGrab,
             NAME_None,
@@ -53,6 +55,7 @@ void UGrabbingSystem::Grab()
 }
 void UGrabbingSystem::Released()
 {
+    if (!PhysicsHandle) {return;};
     if (PhysicsHandle->GrabbedComponent)
     {
         PhysicsHandle->ReleaseComponent();

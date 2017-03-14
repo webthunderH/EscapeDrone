@@ -53,6 +53,8 @@ float UOpenDoor::GetMassOnTriggerVolume()
 {
     float TotalMass=0.0f;
     TArray<AActor*> Overlapping;
+    if(!PressurePlate){UE_LOG(LogTemp,Warning,TEXT("Got A problem On pressure plate"));
+        return TotalMass;};
     PressurePlate->GetOverlappingActors(OUT Overlapping);
     for(const auto& Actor : Overlapping)
     {
