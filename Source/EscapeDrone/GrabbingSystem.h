@@ -22,6 +22,9 @@ protected:
 public:
     // Called every frame
     virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+    //Getter
+    FVector GetLineReachStart();
+    FVector GetLineReachEnd();
     
 private:
     APlayerController* DefaultPawn;
@@ -29,7 +32,7 @@ private:
     float Reach= 100.0f;
     UPhysicsHandleComponent* PhysicsHandle = nullptr;
     UInputComponent* InputComponent= nullptr;
-        
+    
     void Grab();
     void Released();
     // Find the physics Handle Component
@@ -38,7 +41,5 @@ private:
     void SetupInputComponent();
     // return the first target hit by the ray cast.
     const FHitResult LastPhyscBodyHit();
-    // Method to debug line helps
-    void MyDebugLine();
     
 };
