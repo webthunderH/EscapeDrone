@@ -21,7 +21,6 @@ void UOpenDoor::BeginPlay()
     Super::BeginPlay();
     Owner = GetOwner();
     // ...
-    
 }
 
 
@@ -31,30 +30,23 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
     Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
     if(GetMassOnTriggerVolume()>MaxMass)
     {
-        OpenDoor();
-        LastTimeOpenDoor = GetWorld()->GetTimeSeconds();
+        OnOpen.Broadcast();
     }
-    
-    if((LastTimeOpenDoor + DelayCloseDoor)< GetWorld()->GetTimeSeconds())
+    else
     {
-        CloseDoor();
+        OnClose.Broadcast();
     }
-    // ...
 }
-void UOpenDoor::OpenDoor()
-{
-    Owner->SetActorRotation(FRotator(0.0f,OpenAngle,0.0f));
-}
-void UOpenDoor::CloseDoor()
-{
-    Owner->SetActorRotation(FRotator(0.0f, CloseAngle, 0.0f));
-}
+
 float UOpenDoor::GetMassOnTriggerVolume()
 {
     float TotalMass=0.0f;
     TArray<AActor*> Overlapping;
-    if(!PressurePlate){UE_LOG(LogTemp,Warning,TEXT("Got A problem On pressure plate"));
-        return TotalMass;};
+    if(!PressurePlate)
+    {
+        UE_LOG(LogTemp,Warning,TEXT("Got A problem On pressure plate"));
+        return TotalMass;
+    }
     PressurePlate->GetOverlappingActors(OUT Overlapping);
     for(const auto& Actor : Overlapping)
     {
